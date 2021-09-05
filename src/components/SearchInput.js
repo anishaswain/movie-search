@@ -14,7 +14,6 @@ export default function SearchInput() {
   const loadData = async (query) => {
     try {
       const data = await fetchQueryData(query);
-      console.log(data);
       await dispatch(getFullDataAction(data));
       await dispatch(getFullDataSuccess());
     } catch (error) {
@@ -22,7 +21,10 @@ export default function SearchInput() {
     }
   };
 
-  const onSearch = (value) => loadData(value);
+  const onSearch = (value) => {
+    console.log(value);
+    loadData(value);
+  };
 
   return (
     <Search

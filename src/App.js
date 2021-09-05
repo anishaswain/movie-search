@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Layout,
@@ -10,7 +10,6 @@ import {
   Spin,
   Alert,
 } from "antd";
-import MovieGenres from "./components/MovieGenres";
 import Rating from "./components/Rating";
 import SearchInput from "./components/SearchInput";
 import { fetchFullData } from "./services/fetchData";
@@ -24,6 +23,7 @@ import {
 import getRandomNum from "./utils/getRandomNum";
 
 const num = getRandomNum();
+const MovieGenres = React.lazy(() => import("./components/MovieGenres"));
 
 const { Header, Content, Footer } = Layout;
 const { Text, Title } = Typography;
@@ -40,7 +40,6 @@ function App() {
       const data = await fetchFullData();
       setData(data);
       setLoading(false);
-      console.log(data);
       await dispatch(getFullDataAction(data));
       await dispatch(getFullDataSuccess());
     } catch (error) {
@@ -82,7 +81,7 @@ function App() {
               className="site-layout-background"
               style={{ padding: 24, minHeight: 380 }}
             >
-              {loading ? (
+              {loading || movies.isLoading ? (
                 <div
                   id="laodingDiv"
                   style={{
@@ -106,8 +105,10 @@ function App() {
                       <Image
                         className="headerImage"
                         preview={false}
-                        src={fetchImages("w200", data[num].poster_path)}
-                        onClick={() => history.push(`/${data[num].id}}`)}
+                        src={fetchImages("w200", movies.data[num].poster_path)}
+                        onClick={() =>
+                          history.push(`/detail/${movies.data[num].id}`)
+                        }
                       />
                     </Col>
                     <Col
@@ -120,29 +121,33 @@ function App() {
                         <Col sm={{ span: 24 }} lg={{ span: 12 }}>
                           <Title
                             level={3}
-                            onClick={() => history.push(`/${data[num].id}}`)}
+                            onClick={() =>
+                              history.push(`/detail/${movies.data[num].id}`)
+                            }
                             className="title"
                           >
-                            {data[num].original_title}
+                            {movies.data[num].original_title}
                           </Title>
                           <Title level={5}>
-                            Release Date: {data[num].release_date}
+                            Release Date: {movies.data[num].release_date}
                           </Title>
                         </Col>
                         <Col sm={{ span: 24 }} lg={{ span: 6, offset: 6 }}>
-                          <Rating rate={data[num].vote_average} />
+                          <Rating rate={movies.data[num].vote_average} />
                         </Col>
                       </Row>
                       <br></br>
                       <Text>
                         <b>Movie Description: </b>
-                        {data[num].overview}
+                        {movies.data[num].overview}
                       </Text>
                     </Col>
                   </Row>
                 </div>
               )}
-              <MovieGenres />
+              <Suspense fallback={<div>Loading...</div>}>
+                <MovieGenres />
+              </Suspense>
             </div>
           </div>
         </Content>

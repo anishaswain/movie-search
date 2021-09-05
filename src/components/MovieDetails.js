@@ -1,7 +1,7 @@
 import "../App.css";
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Layout, Row, Col, Breadcrumb, Image, Typography, Spin } from "antd";
 import fetchMovieData from "../services/fetchMovieData";
 import fetchImages from "../services/fetchImages";
@@ -19,7 +19,6 @@ function MovieDetails() {
   let history = useHistory();
   let { id } = useParams();
   const dispatch = useDispatch();
-  const movieData = useSelector((state) => state.movieData);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -38,8 +37,6 @@ function MovieDetails() {
   useEffect(() => {
     loadData(id);
   }, []);
-
-  console.log(movieData);
 
   return (
     <>

@@ -15,8 +15,8 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <Route exact path="/" component={App}></Route>
-        <Route path="/:id" component={MovieDetails}></Route>
+        <Route path="/" component={App}></Route>
+        <Route path="/detail/:id" component={MovieDetails}></Route>
       </Router>
     </Provider>
   </React.StrictMode>,

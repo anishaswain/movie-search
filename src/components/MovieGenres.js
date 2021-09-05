@@ -76,7 +76,7 @@ function MovieGenres() {
                     >
                       <div
                         className="movieCard"
-                        onClick={() => history.push(`/${movie.id}`)}
+                        onClick={() => history.push(`/detail/${movie.id}`)}
                       >
                         <Image
                           className="cardImage"
