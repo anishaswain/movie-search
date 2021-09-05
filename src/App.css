@@ -1,38 +1,51 @@
-.App {
+@import '~antd/dist/antd.css';
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+header {
+  font-size: x-large;
+  color: #fff;
+}
+
+.searchInput {
+  margin: 10px 0;
+  width: 50%;
+}
+
+.searchDiv {
+  display: flex;
+  justify-content: center;
+}
+.ant-input-group > .ant-input:first-child,
+.ant-input-group-addon:first-child {
+  border-radius: 30px 30px;
+  height: 50px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.ant-input-group-addon {
+  display: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media screen and (min-width: 200px) {
+  .headerImage {
+    padding: 0 20%;
+  }
+  .cardImage {
+    height: 180px;
+    width: auto;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@media screen and (min-width: 750px) and (max-width: 1100px) {
+  .cardImage {
+    padding: 20%;
+  }
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.stars {
+  font-size: 1.5em;
+  color: rgb(240, 216, 36);
 }
