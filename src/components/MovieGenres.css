@@ -1,0 +1,14 @@
+.main {
+  padding: "0 10%";
+}
+
+.movieCard {
+  background-color: #efefef;
+  min-height: 100%;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.cardImage {
+  border-radius: 10px 10px 0 0;
+}
