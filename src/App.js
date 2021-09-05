@@ -31,14 +31,12 @@ const { Text, Title } = Typography;
 function App() {
   const dispatch = useDispatch();
   let history = useHistory();
-  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const movies = useSelector((state) => state.fullData);
 
   const loadData = async () => {
     try {
       const data = await fetchFullData();
-      setData(data);
       setLoading(false);
       await dispatch(getFullDataAction(data));
       await dispatch(getFullDataSuccess());
