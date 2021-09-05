@@ -1,0 +1,9 @@
+span.anticon.anticon-star.filledstar {
+  font-size: 1.5em;
+  color: rgb(240, 216, 36);
+}
+
+span.anticon.anticon-star.notfilledstar {
+  font-size: 1.5em;
+  color: #e2e2e2;
+}

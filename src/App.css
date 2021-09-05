@@ -9,6 +9,10 @@ header {
   color: #fff;
 }
 
+h3.ant-typography.title {
+  color: #2869a5;
+}
+
 .searchInput {
   margin: 10px 0;
   width: 50%;
@@ -31,17 +35,4 @@ header {
 
 .headerImage {
   border-radius: 10px;
-}
-
-.stars {
-  font-size: 1.5em;
-  color: rgb(240, 216, 36);
-}
-
-.ant-carousel .slick-dots li button {
-  background: #000;
-}
-
-.ant-carousel .slick-dots li.slick-active button {
-  background: red;
 }

@@ -1,7 +1,3 @@
-.main {
-  padding: "0 10%";
-}
-
 .movieCard {
   background-color: #efefef;
   min-height: 100%;
@@ -11,4 +7,8 @@
 
 .cardImage {
   border-radius: 10px 10px 0 0;
+}
+
+h3.ant-typography.title {
+  color: #2869a5;
 }

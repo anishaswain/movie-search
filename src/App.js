@@ -1,38 +1,46 @@
-import "./App.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Layout,
   Row,
   Col,
   Breadcrumb,
-  Input,
   Image,
   Typography,
   Spin,
+  Alert,
 } from "antd";
 import MovieGenres from "./components/MovieGenres";
-import { StarFilled } from "@ant-design/icons";
-import fetchFullData from "./services/fetchData";
+import Rating from "./components/Rating";
+import SearchInput from "./components/SearchInput";
+import { fetchFullData } from "./services/fetchData";
 import fetchImages from "./services/fetchImages";
-// import fetchMovieData from "./services/fetchMovieData";
+import { useHistory } from "react-router-dom";
 import {
   getFullDataAction,
   getFullDataSuccess,
   getFullDataFailure,
 } from "./actions/getMovieDataAction";
+import getRandomNum from "./utils/getRandomNum";
+
+const num = getRandomNum();
 
 const { Header, Content, Footer } = Layout;
-const { Search } = Input;
 const { Text, Title } = Typography;
 
 function App() {
   const dispatch = useDispatch();
+  let history = useHistory();
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const movies = useSelector((state) => state.fullData);
 
   const loadData = async () => {
     try {
       const data = await fetchFullData();
+      setData(data);
+      setLoading(false);
+      console.log(data);
       await dispatch(getFullDataAction(data));
       await dispatch(getFullDataSuccess());
     } catch (error) {
@@ -44,9 +52,13 @@ function App() {
     loadData();
   }, []);
 
-  const onSearch = () => {};
-  return movies.isLoading ? (
-    <Spin />
+  return movies.hasError ? (
+    <Alert
+      message="Error"
+      description="Internal Server Error, Data can not be loaded."
+      type="error"
+      showIcon
+    />
   ) : (
     <>
       <Layout>
@@ -61,25 +73,29 @@ function App() {
         >
           <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>All movies</Breadcrumb.Item>
-            <Breadcrumb.Item>Movie Details</Breadcrumb.Item>
           </Breadcrumb>
           <div>
             <div className="searchDiv">
-              <Search
-                className="searchInput"
-                placeholder="Search for a movie"
-                onSearch={onSearch}
-                enterButton
-              />
+              <SearchInput />
             </div>
             <div
               className="site-layout-background"
               style={{ padding: 24, minHeight: 380 }}
             >
-              {movies.data[0].isLoading ? (
-                <Spin />
+              {loading ? (
+                <div
+                  id="laodingDiv"
+                  style={{
+                    padding: "0 10%",
+                    minHeight: 380,
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Spin />
+                </div>
               ) : (
-                <div style={{ padding: "0 10%" }}>
+                <div style={{ padding: "0 20%" }}>
                   <Row>
                     <Col
                       xs={{ span: 24 }}
@@ -90,7 +106,8 @@ function App() {
                       <Image
                         className="headerImage"
                         preview={false}
-                        src={fetchImages("w300", movies.data[0].poster_path)}
+                        src={fetchImages("w200", data[num].poster_path)}
+                        onClick={() => history.push(`/${data[num].id}}`)}
                       />
                     </Col>
                     <Col
@@ -101,27 +118,25 @@ function App() {
                     >
                       <Row>
                         <Col sm={{ span: 24 }} lg={{ span: 12 }}>
-                          <Title level={3}>
-                            {movies.data[0].original_title}
+                          <Title
+                            level={3}
+                            onClick={() => history.push(`/${data[num].id}}`)}
+                            className="title"
+                          >
+                            {data[num].original_title}
                           </Title>
                           <Title level={5}>
-                            Release Date: {movies.data[0].release_date}
+                            Release Date: {data[num].release_date}
                           </Title>
                         </Col>
                         <Col sm={{ span: 24 }} lg={{ span: 6, offset: 6 }}>
-                          <div>
-                            <StarFilled className="stars" />
-                            <StarFilled className="stars" />
-                            <StarFilled className="stars" />
-                            <StarFilled className="stars" />
-                            <StarFilled className="stars" />
-                          </div>
+                          <Rating rate={data[num].vote_average} />
                         </Col>
                       </Row>
                       <br></br>
                       <Text>
                         <b>Movie Description: </b>
-                        {movies.data[0].overview}
+                        {data[num].overview}
                       </Text>
                     </Col>
                   </Row>
