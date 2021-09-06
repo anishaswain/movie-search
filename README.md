@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+## Foreword
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The project is a web-based platform for creating a Search page for popular movies.
 
-## Available Scripts
+## Scaffolding
 
-In the project directory, you can run:
+```bash
+├── public
+│   └── index.html                  # HTML Template
+├── src
+│   ├── actions                     # redux actions
+│   ├── components                  # component definitions and their stylesheets
+│   ├── config                      # API configurations
+│       ├── apikey.js               # Holds API ket for the movie API
+│   │   └── endpoint.js             # Contains endpoint for the movie API
+│   ├── services                    # redux services to fetch data from API
+│   ├── reducers                    # reducer definitions
+│   ├── utils                       # utility scripts
+│   ├── App.js                      # entrypoint of the component
+│   └── Aapp.css                     # CSS definition for App component
+├── .eslintrc.js                    # js linting configuration
+├── .gitignore
+├── package.json                    # project dependencies
+└── README.md
 
-### `yarn start`
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Installation
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Install Dependencies
 
-### `yarn test`
+`yarn` is the default dependency manager used for installing and building the application.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+$ yarn install
+```
 
-### `yarn build`
+Start Development Server
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+$ yarn start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This will automatically open the application on [http://localhost:3000](http://localhost:8000).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Local Development
 
-### `yarn eject`
+Both the production and development builds of the dashboard require API endpoint configurations in order to query data from specific datastores.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Add the `API_KEY` in `./src/config/apikey.js`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. `src/config/endpoint.js` contains references to API required to visualize data. Please reference the following example for required configuration fields:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```JavaScript
+const endpoints = {
+  basePath: `https://api.themoviedb.org/3/movie/`,
+  // base path to query movies
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  movieDataPath: `https://api.themoviedb.org/3/movie/popular`,
+  // path to query popular movies
 
-## Learn More
+  imagePath: "https://image.tmdb.org/t/p/",
+  // path to fetch images
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  genrePath: `https://api.themoviedb.org/3/genre/movie/list`,
+  // path to fetch genres for catagories
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  queryPath: `https://api.themoviedb.org/3/search/movie`,
+  // path for query params for search input
+};
+```
 
-### Code Splitting
+## Requirements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Install yarn
 
-### Analyzing the Bundle Size
+```
+curl -sL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo
+dnf/yum install yarn
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Build
 
-### Making a Progressive Web App
+Build Application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+$ yarn build
+```
 
-### Advanced Configuration
+This will generate the `dist` folder in the root directory, which contains packaged files such as `***.js`, `***.css`, and `index.html`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Template
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This application is based on v4 of Ant Design which is a production-ready UI solution for admin interfaces. For more information regarding the foundation and template of the application, please visit [https://ant.design/components/overview/](https://ant.design/components/overview/).
