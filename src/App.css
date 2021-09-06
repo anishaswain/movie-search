@@ -2,11 +2,17 @@
 
 .site-layout .site-layout-background {
   background: #fff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 header {
   font-size: x-large;
   color: #fff;
+  background-color: #7854b3;
+}
+
+header.ant-layout-header {
+  background-color: #7854b3;
 }
 
 h3.ant-typography.title {

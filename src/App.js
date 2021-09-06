@@ -92,7 +92,15 @@ function App() {
                   <Spin />
                 </div>
               ) : (
-                <div style={{ padding: "0 20%" }}>
+                <div
+                  style={{
+                    margin: "0 7%",
+                    padding: "2% 5%",
+                    boxShadow: "rgb(149 157 165 / 20%) 0px 8px 24px",
+                    borderRadius: 30,
+                    backgroundColor: "#7855b221",
+                  }}
+                >
                   <Row>
                     <Col
                       xs={{ span: 24 }}

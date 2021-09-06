@@ -1,14 +1,48 @@
 .movieCard {
-  background-color: #efefef;
   min-height: 100%;
   border-radius: 10px;
-  text-align: center;
+  /* text-align: center; */
+}
+
+.movieCard:hover {
+  padding: 15px;
+  background-color: rgba(120, 85, 178, 0.13);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .cardImage {
   border-radius: 10px 10px 0 0;
+  filter: grayscale(0%);
+}
+
+span.ant-tag.ant-tag-has-color.tag {
+  border-radius: 20px;
+  font-size: x-small;
+  float: right;
+}
+
+@media only screen and (max-width: 768px) {
+  span.ant-tag.ant-tag-has-color.tag {
+    float: left;
+  }
+}
+
+.cardImage:hover {
+  filter: grayscale(100%);
 }
 
 h3.ant-typography.title {
   color: #2869a5;
+}
+
+span.title {
+  font-size: large;
+  font-weight: 600;
+  color: #3a75ab;
+}
+
+.ant-collapse-borderless {
+  background-color: rgb(255, 255, 255);
+  border: 0;
+  margin-top: 2%;
 }
