@@ -5,6 +5,14 @@
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
+@media only screen and (max-width: 568px) {
+  main.ant-layout-content.site-layout {
+    padding: 0 !important;
+  }
+  .site-layout .site-layout-background {
+    padding: 24px 0 !important;
+  }
+}
 header {
   font-size: x-large;
   color: #fff;
